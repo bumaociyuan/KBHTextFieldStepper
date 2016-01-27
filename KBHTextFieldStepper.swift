@@ -41,7 +41,7 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 	// MARK: Private Properties
 	
 	/// This is private so that no one can mess with the text field's configuration. Use value and textFieldDelegate to control text field customization.
-	private var textField: UITextField!
+	var textField: UITextField!
 	private let numberFormatter: NSNumberFormatter = {
 		let numberFormatter = NSNumberFormatter()
 		numberFormatter.numberStyle = .DecimalStyle
@@ -169,13 +169,19 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 	}
 	
 	internal func decrement() {
+		let previousValue = value
 		self.value -= self.stepValue
-		self.sendValueChangedEvent()
+		if previousValue != value {
+			self.sendValueChangedEvent()
+		}
 	}
 	
 	internal func increment() {
+		let previousValue = value
 		self.value += self.stepValue
-		self.sendValueChangedEvent()
+		if previousValue != value {
+			self.sendValueChangedEvent()
+		}
 	}
 	
 	private func sendValueChangedEvent() {
@@ -219,6 +225,7 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 		} else {
 			self.value = Double(textField.text!)!
 		}
+		sendActionsForControlEvents(.ValueChanged)
 	}
 }
 

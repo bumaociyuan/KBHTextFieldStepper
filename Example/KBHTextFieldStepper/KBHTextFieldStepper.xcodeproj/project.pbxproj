@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844D70571C58736C00975523 /* KBHTextFieldStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D70561C58736C00975523 /* KBHTextFieldStepper.swift */; };
 		E70A403D1B78391100324EFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A403C1B78391100324EFD /* AppDelegate.swift */; };
 		E70A403F1B78391100324EFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A403E1B78391100324EFD /* ViewController.swift */; };
 		E70A40421B78391100324EFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70A40401B78391100324EFD /* Main.storyboard */; };
@@ -14,7 +15,6 @@
 		E70A40471B78391100324EFD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E70A40451B78391100324EFD /* LaunchScreen.storyboard */; };
 		E70A40521B78391100324EFD /* KBHTextFieldStepperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A40511B78391100324EFD /* KBHTextFieldStepperTests.swift */; };
 		E70A405D1B78391100324EFD /* KBHTextFieldStepperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A405C1B78391100324EFD /* KBHTextFieldStepperUITests.swift */; };
-		E70A406C1B78398000324EFD /* KBHTextFieldStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E70A406B1B78398000324EFD /* KBHTextFieldStepper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		844D70561C58736C00975523 /* KBHTextFieldStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = KBHTextFieldStepper.swift; path = ../../../KBHTextFieldStepper.swift; sourceTree = "<group>"; };
 		E70A40391B78391100324EFD /* KBHTextFieldStepper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KBHTextFieldStepper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E70A403C1B78391100324EFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E70A403E1B78391100324EFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -48,7 +49,6 @@
 		E70A40581B78391100324EFD /* KBHTextFieldStepperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KBHTextFieldStepperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E70A405C1B78391100324EFD /* KBHTextFieldStepperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBHTextFieldStepperUITests.swift; sourceTree = "<group>"; };
 		E70A405E1B78391100324EFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E70A406B1B78398000324EFD /* KBHTextFieldStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBHTextFieldStepper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +99,8 @@
 		E70A403B1B78391100324EFD /* KBHTextFieldStepper */ = {
 			isa = PBXGroup;
 			children = (
-				E70A406B1B78398000324EFD /* KBHTextFieldStepper.swift */,
 				E70A403C1B78391100324EFD /* AppDelegate.swift */,
+				844D70561C58736C00975523 /* KBHTextFieldStepper.swift */,
 				E70A403E1B78391100324EFD /* ViewController.swift */,
 				E70A40401B78391100324EFD /* Main.storyboard */,
 				E70A40431B78391100324EFD /* Assets.xcassets */,
@@ -259,7 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E70A403F1B78391100324EFD /* ViewController.swift in Sources */,
-				E70A406C1B78398000324EFD /* KBHTextFieldStepper.swift in Sources */,
+				844D70571C58736C00975523 /* KBHTextFieldStepper.swift in Sources */,
 				E70A403D1B78391100324EFD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -487,6 +487,7 @@
 				E70A40631B78391100324EFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E70A40641B78391100324EFD /* Build configuration list for PBXNativeTarget "KBHTextFieldStepperTests" */ = {
 			isa = XCConfigurationList;
@@ -495,6 +496,7 @@
 				E70A40661B78391100324EFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E70A40671B78391100324EFD /* Build configuration list for PBXNativeTarget "KBHTextFieldStepperUITests" */ = {
 			isa = XCConfigurationList;
@@ -503,6 +505,7 @@
 				E70A40691B78391100324EFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
