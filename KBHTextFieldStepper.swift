@@ -14,25 +14,25 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 	
 	public var value: Double {
 		get { return _value }
-		set { self.setValue(newValue) }
+		set { setValue(newValue) }
 	}
 	public var minimumValue: Double = 0 {
 		didSet {
-			if self.value < self.minimumValue {
-				self.value = self.minimumValue
+			if value < minimumValue {
+				value = minimumValue
 			}
 		}
 	}
 	public var maximumValue: Double = 100 {
 		didSet {
-			if self.value > self.maximumValue {
-				self.value = self.maximumValue
+			if value > maximumValue {
+				value = maximumValue
 			}
 		}
 	}
 	public var stepValue: Double = 1
 	public var textFieldDelegate: UITextFieldDelegate? {
-		didSet { self.textField.delegate = self.textFieldDelegate }
+		didSet { textField.delegate = textFieldDelegate }
 	}
 	public var wraps: Bool = false
 	public var autorepeat: Bool = true
@@ -66,7 +66,7 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 	
 	public override init(frame: CGRect) {
 		super.init(frame: frame)
-		self.setup()
+		setup()
 	}
 	
 	public required init?(coder aDecoder: NSCoder) {
@@ -75,7 +75,7 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 	
 	public override func awakeFromNib() {
 		super.awakeFromNib()
-		self.setup()
+		setup()
 	}
 	
 	private func setup() {
@@ -83,11 +83,11 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 		let height = frame.size.height
 		let buttonWidth = height
 		let buttonHeight = height
-		self.backgroundColor = .whiteColor()
+		backgroundColor = .whiteColor()
 		
 		// Buttons
 		let minus = KBHTextFieldStepperButton(frame: CGRectMake(0, 0, buttonWidth, buttonHeight), type: .Minus)
-		let plusFrame = CGRect(origin: CGPointMake(self.frame.size.width - minus.frame.size.width, 0), size: CGSizeMake(buttonWidth, buttonHeight))
+		let plusFrame = CGRect(origin: CGPointMake(frame.size.width - minus.frame.size.width, 0), size: CGSizeMake(buttonWidth, buttonHeight))
 		let plus = KBHTextFieldStepperButton(frame: plusFrame, type: .Plus)
 		minus.addTarget(self, action: "minusTouchDown:", forControlEvents: .TouchDown)
 		minus.addTarget(self, action: "minusTouchUp:", forControlEvents: .TouchUpInside)
@@ -96,100 +96,100 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 		
 		// Dividers
 		leftDivider = UIView(frame: CGRectMake(minus.frame.size.width, 0, 1.5, height))
-		rightDivider = UIView(frame: CGRectMake(self.frame.size.width - plus.frame.size.width, 0, 1.5, height))
-		leftDivider.backgroundColor = self.tintColor
-		rightDivider.backgroundColor = self.tintColor
+		rightDivider = UIView(frame: CGRectMake(frame.size.width - plus.frame.size.width, 0, 1.5, height))
+		leftDivider.backgroundColor = tintColor
+		rightDivider.backgroundColor = tintColor
 		
 		// Text Field
-		self.textField = UITextField(frame: CGRectMake(leftDivider.frame.origin.x + leftDivider.frame.size.width, 0, rightDivider.frame.origin.x - (leftDivider.frame.origin.x + leftDivider.frame.size.width), height))
-		self.textField.textAlignment = .Center
-		self.textField.text = "0"
-		self.textField.keyboardType = UIKeyboardType.NumbersAndPunctuation
-		self.textField.delegate = self
+		textField = UITextField(frame: CGRectMake(leftDivider.frame.origin.x + leftDivider.frame.size.width, 0, rightDivider.frame.origin.x - (leftDivider.frame.origin.x + leftDivider.frame.size.width), height))
+		textField.textAlignment = .Center
+		textField.text = "0"
+		textField.keyboardType = UIKeyboardType.NumbersAndPunctuation
+		textField.delegate = self
 		
 		// Layout:  - | textField | +
-		self.addSubview(minus)
-		self.addSubview(leftDivider)
-		self.addSubview(self.textField)
-		self.addSubview(rightDivider)
-		self.addSubview(plus)
+		addSubview(minus)
+		addSubview(leftDivider)
+		addSubview(textField)
+		addSubview(rightDivider)
+		addSubview(plus)
 		
 		// Border
-		self.layer.borderWidth = 1
-		self.layer.borderColor = self.tintColor.CGColor
-		self.layer.cornerRadius = 5
-		self.clipsToBounds = true
+		layer.borderWidth = 1
+		layer.borderColor = tintColor.CGColor
+		layer.cornerRadius = 5
+		clipsToBounds = true
 		
-		self.value = self.minimumValue
+		value = minimumValue
 	}
 	
 	// MARK: Getters/Setters
 	
 	private func setValue(value: Double) {
-		if value > self.maximumValue {
-			_value = self.wraps ? self.minimumValue : self.maximumValue
-		} else if value < self.minimumValue {
-			_value = self.wraps ? self.maximumValue : self.minimumValue
+		if value > maximumValue {
+			_value = wraps ? minimumValue : maximumValue
+		} else if value < minimumValue {
+			_value = wraps ? maximumValue : minimumValue
 		} else {
 			_value = value
 		}
 		
-		self.textField.text = self.numberFormatter.stringFromNumber(NSNumber(double: _value))
+		textField.text = numberFormatter.stringFromNumber(NSNumber(double: _value))
 	}
 	
 	// MARK: Actions
 	
-	internal func minusTouchDown(sender: KBHTextFieldStepperButton) { self.buttonTouchDown(sender, selector: "decrement") }
-	internal func plusTouchDown(sender: KBHTextFieldStepperButton) { self.buttonTouchDown(sender, selector: "increment") }
+	internal func minusTouchDown(sender: KBHTextFieldStepperButton) { buttonTouchDown(sender, selector: "decrement") }
+	internal func plusTouchDown(sender: KBHTextFieldStepperButton) { buttonTouchDown(sender, selector: "increment") }
 	
 	private func buttonTouchDown(sender: KBHTextFieldStepperButton, selector: Selector) {
-		sender.backgroundColor = self.tintColor.colorWithAlphaComponent(0.15)
-		self.sendSubviewToBack(sender)
-		self.performSelector(selector)
+		sender.backgroundColor = tintColor.colorWithAlphaComponent(0.15)
+		sendSubviewToBack(sender)
+		performSelector(selector)
 		
-		if self.autorepeat {
-			self.timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: selector, userInfo: nil, repeats: true)
+		if autorepeat {
+			timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: selector, userInfo: nil, repeats: true)
 		}
 	}
 	
-	internal func minusTouchUp(sender: KBHTextFieldStepperButton) { self.buttonTouchUp(sender) }
-	internal func plusTouchUp(sender: KBHTextFieldStepperButton) { self.buttonTouchUp(sender) }
+	internal func minusTouchUp(sender: KBHTextFieldStepperButton) { buttonTouchUp(sender) }
+	internal func plusTouchUp(sender: KBHTextFieldStepperButton) { buttonTouchUp(sender) }
 	
 	private func buttonTouchUp(sender: KBHTextFieldStepperButton) {
-		sender.backgroundColor = self.backgroundColor
-		self.sendSubviewToBack(sender)
+		sender.backgroundColor = backgroundColor
+		sendSubviewToBack(sender)
 		
-		guard let timer = self.timer else { return }
+		guard let timer = timer else { return }
 		timer.invalidate()
 		
 		// autorepeat is on since we used a timer. If not continuous, send the only value changed event
-		if !self.continuous {
-			self.sendActionsForControlEvents(.ValueChanged)
+		if !continuous {
+			sendActionsForControlEvents(.ValueChanged)
 		}
 	}
 	
 	internal func decrement() {
 		let previousValue = value
-		self.value -= self.stepValue
+		value -= stepValue
 		if previousValue != value {
-			self.sendValueChangedEvent()
+			sendValueChangedEvent()
 		}
 	}
 	
 	internal func increment() {
 		let previousValue = value
-		self.value += self.stepValue
+		value += stepValue
 		if previousValue != value {
-			self.sendValueChangedEvent()
+			sendValueChangedEvent()
 		}
 	}
 	
 	private func sendValueChangedEvent() {
-		if self.autorepeat && self.continuous {
-			self.sendActionsForControlEvents(.ValueChanged)
-		} else if !self.autorepeat {
+		if autorepeat && continuous {
+			sendActionsForControlEvents(.ValueChanged)
+		} else if !autorepeat {
 			// If not using autorepeat, this is only called once. Send value changed updates
-			self.sendActionsForControlEvents(.ValueChanged)
+			sendActionsForControlEvents(.ValueChanged)
 		}
 	}
 	
@@ -221,9 +221,9 @@ public class KBHTextFieldStepper: UIControl, UITextFieldDelegate {
 	
 	public func textFieldDidEndEditing(textField: UITextField) {
 		if textField.text?.characters.count == 0 {
-			self.value = 0
+			value = 0
 		} else {
-			self.value = Double(textField.text!)!
+			value = Double(textField.text!)!
 		}
 		sendActionsForControlEvents(.ValueChanged)
 	}
@@ -244,7 +244,7 @@ internal class KBHTextFieldStepperButton: UIControl {
 	internal required init(frame: CGRect, type: KBHTextFieldStepperButtonType) {
 		self.type = type
 		super.init(frame: frame)
-		self.backgroundColor = .clearColor()
+		backgroundColor = .clearColor()
 	}
 	
 	internal required init?(coder aDecoder: NSCoder) {
@@ -254,12 +254,12 @@ internal class KBHTextFieldStepperButton: UIControl {
 	// MARK: Drawing
 	
 	internal override func drawRect(rect: CGRect) {
-		self.tintColor.setFill()
+		tintColor.setFill()
 		
-		if self.type == .Minus {
-			self.drawMinus()
+		if type == .Minus {
+			drawMinus()
 		} else {
-			self.drawPlus()
+			drawPlus()
 		}
 	}
 	
@@ -290,10 +290,10 @@ internal class KBHTextFieldStepperButton: UIControl {
 	// MARK: Actions
 	
 	internal override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		self.sendActionsForControlEvents(.TouchDown)
+		sendActionsForControlEvents(.TouchDown)
 	}
 	
 	internal override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
-		self.sendActionsForControlEvents(.TouchUpInside)
+		sendActionsForControlEvents(.TouchUpInside)
 	}
 }
